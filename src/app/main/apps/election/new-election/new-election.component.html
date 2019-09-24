@@ -1,0 +1,82 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Create New Election</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+<!-- 
+        <mat-toolbar-row class="toolbar-bottom py-16" fxLayout="column" fxLayoutAlign="center center">
+            <img [src]="contact.avatar" class="avatar contact-avatar huge m-0"
+                 [alt]="contact.name"/>
+            <div class="contact-name mt-8">testttttt}</div>
+        </mat-toolbar-row> -->
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+
+        <form [formGroup]="newElectionForm">
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Title</mat-label>
+                    <mat-icon matSuffix class="secondary-text">title</mat-icon>
+                    <input name="name" formControlName="title" matInput required>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Location</mat-label>
+                    <mat-icon matSuffix class="secondary-text">location_on</mat-icon>
+                    <input name="location" formControlName="location" matInput required>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <!-- <mat-form-field appearance="outline" fxFlex> -->
+                    <mat-label>Start Date</mat-label>
+                    <!-- <input matInput [matDatepicker]="startDate" name="startDate" formControlName="startDate">
+                    <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                    <mat-datepicker #startDate></mat-datepicker> -->
+
+    
+                    <angular2-date-picker formControlName="startDate" [settings]="settings"></angular2-date-picker>
+                <!-- </mat-form-field> -->
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <!-- <mat-form-field appearance="outline" fxFlex> -->
+                    <mat-label>End Date</mat-label>
+                    <!-- <input matInput [matDatepicker]="endDate" name="endDate" formControlName="endDate">
+                    <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                    <mat-datepicker #endDate></mat-datepicker>
+                </mat-form-field> -->
+                <angular2-date-picker formControlName="endDate" [settings]="settings"></angular2-date-picker>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Amount</mat-label>
+                    <mat-icon matSuffix class="secondary-text">attach_money</mat-icon>
+                    <input name="amountToBePaid" formControlName="amountToBePaid" matInput required>
+                </mat-form-field>
+            </div>
+        </form>
+
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+
+        <button 
+                mat-button
+                class="save-button"
+                (click)="matDialogRef.close(['save',newElectionForm.value])"
+                [disabled]="newElectionForm.invalid"
+                aria-label="SAVE">
+            SAVE
+        </button>
+
+    </div>
+</div>

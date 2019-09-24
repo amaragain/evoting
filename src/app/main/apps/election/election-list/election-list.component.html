@@ -1,0 +1,81 @@
+<div id="products" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    how_to_vote
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Elections
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input #filter placeholder="Search for a product" (keyup)="applyFilterSent($event.target.value)">
+                </div>
+            </div>
+            <!-- / SEARCH -->
+            <!-- ADD BUTTON -->
+            <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0" (click)="createNewElection()">
+                <span>ADD NEW ELECTION</span>
+            </button>
+            <!-- / ADD BUTTON -->
+        </div>
+        <!-- / HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <mat-table #table [dataSource]="dataSource" matSort>
+                 <ng-container matColumnDef="title">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+                    <mat-cell *matCellDef="let election"> {{election.title}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="location">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
+                    <mat-cell *matCellDef="let election"> {{election.location}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="amount">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Amount ($)</mat-header-cell>
+                    <mat-cell class="description" *matCellDef="let election"> {{election.amountToBePaid}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="start date">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </mat-header-cell>
+                    <mat-cell *matCellDef="let election"> {{election.startDate | date :'fullDate' }} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="end date">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> End Date </mat-header-cell>
+                    <mat-cell *matCellDef="let election"> {{election.endDate | date :'fullDate'}} </mat-cell>
+                </ng-container>
+
+                 <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+                    <mat-cell *matCellDef="let election"> 
+
+                        <mat-icon matTooltip="Info about the action" (click)="addparty(election)">add_circle</mat-icon>
+
+                        <mat-icon matTooltip="Info about the action" (click)="editElection(election)">edit</mat-icon>
+                        
+                        <mat-icon matTooltip="Info about the action" (click)="deleteElection(election)">delete</mat-icon>
+                    </mat-cell>
+
+
+                </ng-container>
+                
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+            </mat-paginator>
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

@@ -1,0 +1,18 @@
+// Import Fuse core library
+@import "@fuse/scss/core";
+
+// Import app.theme.scss
+@import "app/app.theme";
+
+// bootstrap style toast 
+// or import a bootstrap 4 alert styled design (SASS ONLY)
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+// @import '~bootstrap/scss/bootstrap';
+
+//  @import '../node_modules/bootstrap/scss/functions';
+ @import '~ngx-toastr/toastr-bs4-alert';
+ @import "~ng-pick-datetime/assets/style/picker.min.css";

@@ -1,0 +1,34 @@
+{
+    "name": "Elections",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "properties": {},
+    "validations": [],
+    "relations": {
+        "election_parties": {
+            "type": "hasMany",
+            "model": "party",
+            "foreignKey": "election_id"
+        },
+        "election_voters": {
+            "type": "hasMany",
+            "model": "voter",
+            "foreignKey": "election_id"
+        },
+        "election_candidate": {
+            "type": "hasMany",
+            "model": "candidate",
+            "foreignKey": "election_id"
+        },
+        "voter_candidate":{
+            "type": "hasMany",
+            "model": "Members",
+            "foreignKey": "id"
+        }
+    },
+    "acls": [],
+    "methods": {}
+}

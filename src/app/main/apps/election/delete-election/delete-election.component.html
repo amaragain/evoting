@@ -1,0 +1,21 @@
+<div class="dialog-content-wrapper">
+  <mat-toolbar matDialogTitle class="mat-accent m-0">
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+          <span class="title dialog-title">Delete Election</span>
+          <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+              <mat-icon>close</mat-icon>
+          </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <p mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+      Would you like to delete permenently?
+    </p>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+
+      <button mat-raise-button class="cancel-button" (click)="matDialogRef.close(false)">Cancel</button>
+      <button mat-raise-button class="save-button" (click)="matDialogRef.close(true)" aria-label="SAVE">Delete</button>
+    </div>
+
+  </div>

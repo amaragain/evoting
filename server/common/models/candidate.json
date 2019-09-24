@@ -1,0 +1,40 @@
+{
+    "name": "candidate",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "properties": {
+        "election_id": {
+            "type": "number"
+        },
+        "voter_id": {
+            "type": "number"
+        }
+    },
+    "validations": [],
+    "relations": {
+        "election_candidateregister": {
+            "type": "belongsTo",
+            "model": "Elections",
+            "foreignKey": "election_id"
+        },
+        "party_candidateregister": {
+            "type": "belongsTo",
+            "model": "party",
+            "foreignKey": "party_id"
+        }
+    },
+    "acls": [
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$authenticated",
+            "permission": "ALLOW",
+            "property": "createCandidate",
+            "model": "*"
+        }
+    ],
+    "methods": {}
+}

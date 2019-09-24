@@ -1,0 +1,53 @@
+<div class="dialog-content-wrapper">
+  <mat-toolbar matDialogTitle class="mat-accent m-0">
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+          <span class="title dialog-title">{{_data.action}}</span>
+          <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+              <mat-icon>close</mat-icon>
+          </button>
+      </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+
+      <form [formGroup]="addVoterForm">
+
+        
+          <div fxLayout="row" fxLayoutAlign="start start">
+              <mat-form-field appearance="outline" fxFlex>
+                  <mat-label>Number</mat-label>
+                  <mat-icon matSuffix class="secondary-text">Number</mat-icon>
+                  <input name="Number" formControlName="Number" matInput required>
+              </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start start">
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Name</mat-label>
+                <mat-icon matSuffix class="secondary-text">Name</mat-icon>
+                <input name="name" formControlName="name" matInput >
+            </mat-form-field>
+        </div>
+
+          <div fxLayout="row" fxLayoutAlign="start start">
+              <mat-form-field appearance="outline" fxFlex>
+                  <mat-label>Email</mat-label>
+                  <mat-icon matSuffix class="secondary-text">Email</mat-icon>
+                  <input name="email" formControlName="email" matInput required (keyup)="findemail($event.target.value)">
+              </mat-form-field>
+          </div>
+      
+      </form>
+
+  </div>
+
+  <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+
+      <button mat-button class="save-button"
+      (click)="matDialogRef.close(['save',addVoterForm.value])"
+              [disabled]="addVoterForm.invalid"
+              aria-label="SAVE">
+          SAVE
+      </button>
+
+  </div>
+</div>
