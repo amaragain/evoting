@@ -1,0 +1,29 @@
+{
+  "name": "Transactions",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "reciever": {
+      "type": "string"
+    },
+    "sender": {
+      "type": "string"
+    },
+    "election_id": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "string"
+    },
+    "type": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

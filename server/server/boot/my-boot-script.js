@@ -1,7 +1,7 @@
 // module.exports = function(app) {
 //    app.models.Email.send({
-//         to: 'minnuanitha20@gmail.com',
-//         from: 'minnu123suresh@gmail.com',
+//         to: 'evotingproject7@gmail.com',
+//         from: 'evotingproject7@gmail.com',
 //         subject: 'my subject',
 //         text: 'my text',
 //         html: 'my <em>html</em>'

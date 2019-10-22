@@ -69,34 +69,18 @@ export class LoginComponent implements OnInit
     }
 
     login(){
-        this.membersApi.find(
-            {
-                where: {
-                    email: this.loginForm.value.email
-                }
-
-            }).subscribe(response => {
-                console.log(response, "deas")
-                let res = JSON.parse(JSON.stringify(response))
         this.membersApi.login(this.loginForm.value).subscribe(_res => {
             
-            if (res[0].role == 'admin') {
-                this.toastr.success('Login successfully');        
+            if(_res){
+                this.toastr.success('Login successfully');
+                
                 this.router.navigate(['/apps/election/election-list']);
-               }
-               else if (res[0].type == 'voter') {
-                this.toastr.success('Login successfully');        
-                this.router.navigate(['/apps/election/candidate-list']);
-               }
-               else if (res[0].type == 'candidate') {
-                this.toastr.success('Login successfully');        
-                this.router.navigate(['/apps/election/candidate-view']);
-               }
+            }
+            
             else{
-                this.toastr.error('Login error');
+                this.toastr.error('Login successfully');
             }
 
         })
-    })
     }
 }

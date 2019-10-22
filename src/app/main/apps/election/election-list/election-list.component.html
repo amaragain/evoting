@@ -44,7 +44,7 @@
                 </ng-container>
                 <ng-container matColumnDef="amount">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> Amount ($)</mat-header-cell>
-                    <mat-cell class="description" *matCellDef="let election"> {{election.amountToBePaid}} </mat-cell>
+                    <mat-cell class="description" *matCellDef="let election"> {{election.amountToBePaid ? election.amountToBePaid : 'Add Voters'}} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="start date">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </mat-header-cell>
@@ -59,11 +59,17 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
                     <mat-cell *matCellDef="let election"> 
 
-                        <mat-icon matTooltip="Info about the action" (click)="addparty(election)">add_circle</mat-icon>
+                        <mat-icon matTooltip="Info about the action" (click)="addparty(election)" *ngIf="(currentUser?.userType == 'superadmin')">add_circle</mat-icon>
+                        <!-- <mat-icon matTooltip="Info about the action" (click)="editElection(election)" *ngIf="(currentUser?.userType == 'superadmin')">edit</mat-icon>
+                        <mat-icon matTooltip="Info about the action" (click)="deleteElection(election)" *ngIf="(currentUser?.userType == 'superadmin')">delete</mat-icon> -->
+                        <mat-icon matTooltip="Info about the action" title="Start Election" (click)="startElection(election)" *ngIf="currentUser?.userType == 'superadmin' && !election?.status && election.election_voters.length > 0 && election?.election_candidates.length > 0">how_to_vote</mat-icon>
+                        <mat-icon matTooltip="Info about the action" title="No voters or candidates assigned." *ngIf="currentUser?.userType == 'superadmin' && !election?.status && (election.election_voters.length == 0 || election.election_candidates.length == 0)" style="opacity: .5;">how_to_vote</mat-icon>
+                        <mat-icon matTooltip="Info about the action" color="primary" title="Veiw Election" (click)="viewElectionResult(election)" *ngIf="(currentUser?.userType == 'superadmin' && election?.status)">visibility</mat-icon>
+                        <!-- <mat-icon matTooltip="Info about the action" color="primary" title="Veiw Election" (click)="viewElectionResult(election)" *ngIf="currentUser?.type == 'voter'">visibility</mat-icon> -->
 
-                        <mat-icon matTooltip="Info about the action" (click)="editElection(election)">edit</mat-icon>
-                        
-                        <mat-icon matTooltip="Info about the action" (click)="deleteElection(election)">delete</mat-icon>
+                        <!-- <button mat-butto matTooltip="Info about the action" (click)="payForElection(election.id)" *ngIf="currentUser?.type == 'candidate' && (currentDate < election.startDate)">Pay Amount - {{election.id}} -- {{currentDate}} -- {{election.startDate}}</button> -->
+                        <button mat-butto matTooltip="Info about the action" (click)="payForElection(election.id)" *ngIf="currentUser?.type == 'candidate' && election?.election_transactions.length == 0">Pay {{election.amountToBePaid}} Coin</button>
+
                     </mat-cell>
 
 

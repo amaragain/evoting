@@ -1,151 +1,320 @@
 <mat-tab-group mat-stretch-tabs>
-        <mat-tab label="PARTY LIST">
-<div id="products" class="page-layout carded fullwidth inner-scroll">
-    <!-- TOP BACKGROUND -->
-    <div class="top-bg accent"></div>
-    <!-- / TOP BACKGROUND -->
-    <!-- CENTER -->
-    <div class="center">
-        <!-- HEADER -->
-        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
-            <!-- APP TITLE -->
-            <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
-                    how_to_vote
-                </mat-icon>
-                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    Parties
-                </span>
-            </div>
-            <!-- / APP TITLE -->
-            <!-- SEARCH -->
-            <div class="search-wrapper mx-32 mx-md-0">
-                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>search</mat-icon>
-                    <input #filter placeholder="Search for a party" (keyup)="applyFilterSent($event.target.value)">
-                </div>
-            </div>
-            <!-- / SEARCH -->
-            <!-- ADD BUTTON -->
-            <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0" (click)="createNewParty()">
-                <span>ADD NEW PARTY</span>
-            </button>
-            <!-- / ADD BUTTON -->
-        </div>
-        <!-- / HEADER -->
-        <!-- CONTENT CARD -->
-        <div class="content-card">
-            <mat-table #table [dataSource]="dataSource" matSort>
-                 <ng-container matColumnDef="title">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
-                    <mat-cell *matCellDef="let party"> {{party.title}}</mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="logo">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header> Logo </mat-header-cell>
-                    <mat-cell *matCellDef="let party"> {{party.partyLogo}} </mat-cell>
-                </ng-container>
-
-                 <ng-container matColumnDef="actions">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
-                    <mat-cell *matCellDef="let party"> 
-
-                       
-                        <mat-icon matTooltip="Info about the action" (click)="editparty(party)">edit</mat-icon>
-                        
-                        <mat-icon matTooltip="Info about the action" (click)="deleteparty(party)">delete</mat-icon>
-                    </mat-cell>
-
-
-                </ng-container>
-
-                
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </mat-table>
-            <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
-            </mat-paginator>
-        </div>
-        <!-- / CONTENT CARD -->
-    </div>
-    <!-- / CENTER -->
-</div>
-</mat-tab>
-<mat-tab label="VOTER LIST"> 
+    <mat-tab label="PARTY LIST" *ngIf="!election_entry">
         <div id="products" class="page-layout carded fullwidth inner-scroll">
-                <!-- TOP BACKGROUND -->
-                <div class="top-bg accent"></div>
-                <!-- / TOP BACKGROUND -->
-                <!-- CENTER -->
-                <div class="center">
-                    <!-- HEADER -->
-                    <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
-                        <!-- APP TITLE -->
-                        <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
-                            <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
-                                how_to_vote
-                            </mat-icon>
-                            <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                                Voters
-                            </span>
-                        </div>
-                        <!-- / APP TITLE -->
-                        <!-- SEARCH -->
-                        <div class="search-wrapper mx-32 mx-md-0">
-                            <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
-                                <mat-icon>search</mat-icon>
-                                <input #filter placeholder="Search for a voter" (keyup)="applyFilterSent($event.target.value)">
-                            </div>
-                        </div>
-                        <!-- / SEARCH -->
-                        <!-- ADD BUTTON -->
-                        <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0" (click)="createNewVoter()">
-                            <span>ADD VOTER</span>
-                        </button>
-                        <!-- / ADD BUTTON -->
-                        
+            <!-- TOP BACKGROUND -->
+            <div class="top-bg accent"></div>
+            <!-- / TOP BACKGROUND -->
+            <!-- CENTER -->
+            <div class="center">
+                <!-- HEADER -->
+                <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+                    fxLayoutAlign.gt-sm="space-between center">
+                    <!-- APP TITLE -->
+                    <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="logo-icon s-32 mr-16"
+                            [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                            how_to_vote
+                        </mat-icon>
+                        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                            Parties
+                        </span>
                     </div>
-                    <!-- / HEADER -->
-                    <!-- CONTENT CARD -->
-                    <div class="content-card">
-                        <mat-table #table [dataSource]="dataSource1" matSort>
-                            
-                            <ng-container matColumnDef="number">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Number </mat-header-cell>
-                                <mat-cell *matCellDef="let voter"> {{voter.voter_detail.Number}} </mat-cell>
-                            </ng-container>
-                            <ng-container matColumnDef="name">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-                                    <mat-cell *matCellDef="let voter"> {{voter.voter_detail.name}} </mat-cell>
-                                </ng-container>
-                            <ng-container matColumnDef="email">
-                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
-                                        <mat-cell *matCellDef="let voter"> {{voter.voter_detail.email}} </mat-cell>
-                                    </ng-container>
-
-            
-                             <ng-container matColumnDef="actions">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
-                                <mat-cell *matCellDef="let voter"> 
-            
-                                   
-                                    <mat-icon matTooltip="Info about the action" (click)="editvoter(voter)">edit</mat-icon>
-                                    
-                                    <mat-icon matTooltip="Info about the action" (click)="deletevoter(voter)">delete</mat-icon>
-                                </mat-cell>
-            
-            
-                            </ng-container>
-            
-                            
-                            <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
-                            <mat-row *matRowDef="let row1; columns: displayedColumns1;"></mat-row>
-                        </mat-table>
-                        <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
-                        </mat-paginator>
+                    <!-- / APP TITLE -->
+                    <!-- SEARCH -->
+                    <div class="search-wrapper mx-32 mx-md-0">
+                        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon>search</mat-icon>
+                            <input #filter placeholder="Search for a party"
+                                (keyup)="applyFilterSent($event.target.value)">
+                        </div>
                     </div>
-                    <!-- / CONTENT CARD -->
+                    <!-- / SEARCH -->
+                    <!-- ADD BUTTON -->
+                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0"
+                        (click)="createNewParty()">
+                        <span>ADD NEW PARTY</span>
+                    </button>
+                    <!-- / ADD BUTTON -->
                 </div>
-                <!-- / CENTER -->
+                <!-- / HEADER -->
+                <!-- CONTENT CARD -->
+                <div class="content-card">
+                    <mat-table #table [dataSource]="dataSource" matSort>
+                        <ng-container matColumnDef="title">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+                            <mat-cell *matCellDef="let party"> {{party.title}}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="logo">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Logo </mat-header-cell>
+                            <mat-cell *matCellDef="let party"> <img
+                                    src="{{baseUrl}}/api/storages/party_logo/download/{{party.partyLogo}}" width="36">
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="actions">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+                            <mat-cell *matCellDef="let party">
+
+
+                                <mat-icon matTooltip="Info about the action" (click)="editparty(party)">edit</mat-icon>
+
+                                <mat-icon matTooltip="Info about the action" (click)="deleteparty(party)">delete
+                                </mat-icon>
+                            </mat-cell>
+
+
+                        </ng-container>
+
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+                    </mat-paginator>
+                </div>
+                <!-- / CONTENT CARD -->
             </div>
-</mat-tab>
+            <!-- / CENTER -->
+        </div>
+    </mat-tab>
+
+
+    <mat-tab label="VOTER LIST" *ngIf="!election_entry">
+        <div id="products" class="page-layout carded fullwidth inner-scroll">
+            <!-- TOP BACKGROUND -->
+            <div class="top-bg accent"></div>
+            <!-- / TOP BACKGROUND -->
+            <!-- CENTER -->
+            <div class="center">
+                <!-- HEADER -->
+                <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+                    fxLayoutAlign.gt-sm="space-between center">
+                    <!-- APP TITLE -->
+                    <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="logo-icon s-32 mr-16"
+                            [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                            how_to_vote
+                        </mat-icon>
+                        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                            Voters
+                        </span>
+                    </div>
+                    <!-- / APP TITLE -->
+                    <!-- SEARCH -->
+                    <div class="search-wrapper mx-32 mx-md-0">
+                        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon>search</mat-icon>
+                            <input #filter placeholder="Search for a voter"
+                                (keyup)="applyFilterSent($event.target.value)">
+                        </div>
+                    </div>
+                    <!-- / SEARCH -->
+                    <!-- ADD BUTTON -->
+                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0"
+                        (click)="createNewVoter()">
+                        <span>ADD VOTER</span>
+                    </button>
+                    <!-- / ADD BUTTON -->
+
+                </div>
+                <!-- / HEADER -->
+                <!-- CONTENT CARD -->
+                <div class="content-card">
+                    <mat-table #table [dataSource]="dataSource1" matSort>
+
+                        <ng-container matColumnDef="number">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Number </mat-header-cell>
+                            <mat-cell *matCellDef="let voter"> {{voter?.voter_detail?.Number}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                            <mat-cell *matCellDef="let voter"> {{voter?.voter_detail?.name}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="email">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                            <mat-cell *matCellDef="let voter"> {{voter?.voter_detail?.email}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="password">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Password </mat-header-cell>
+                            <mat-cell *matCellDef="let voter"> {{voter?.voter_detail?.password}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="actions">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+                            <mat-cell *matCellDef="let voter">
+
+
+                                <mat-icon matTooltip="Info about the action" (click)="editvoter(voter)">edit</mat-icon>
+
+                                <mat-icon matTooltip="Info about the action" (click)="deletevoter(voter)">delete
+                                </mat-icon>
+                            </mat-cell>
+
+
+                        </ng-container>
+
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+                        <mat-row *matRowDef="let row1; columns: displayedColumns1;"></mat-row>
+                    </mat-table>
+                    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+                    </mat-paginator>
+                </div>
+                <!-- / CONTENT CARD -->
+            </div>
+            <!-- / CENTER -->
+        </div>
+    </mat-tab>
+
+    <mat-tab label="CANDIDATES LIST" *ngIf="!election_entry">
+        <div id="products" class="page-layout carded fullwidth inner-scroll">
+            <!-- TOP BACKGROUND -->
+            <div class="top-bg accent"></div>
+            <!-- / TOP BACKGROUND -->
+            <!-- CENTER -->
+            <div class="center">
+                <!-- HEADER -->
+                <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+                    fxLayoutAlign.gt-sm="space-between center">
+                    <!-- APP TITLE -->
+                    <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="logo-icon s-32 mr-16"
+                            [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                            how_to_vote
+                        </mat-icon>
+                        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                            Candidates
+                        </span>
+                    </div>
+                    <!-- / APP TITLE -->
+                    <!-- SEARCH -->
+                    <div class="search-wrapper mx-32 mx-md-0">
+                        <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                            <!-- <mat-icon>search</mat-icon>
+                            <input #filter placeholder="Search for a voter"
+                                (keyup)="applyFilterSent($event.target.value)"> -->
+                        </div>
+                    </div>
+                    <!-- / SEARCH -->
+                    <!-- ADD BUTTON -->
+                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
+                        <!-- <span>ADD VOTER</span> -->
+                    </button>
+                    <!-- / ADD BUTTON -->
+
+                </div>
+                <!-- / HEADER -->
+                <!-- CONTENT CARD -->
+                <div class="content-card">
+                    <mat-table #table [dataSource]="dataSource2" matSort>
+
+                        <ng-container matColumnDef="partylogo">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Party Logo </mat-header-cell>
+                            <mat-cell *matCellDef="let candidate"> 
+                                <img src="{{baseUrl}}/api/storages/party_logo/download/{{candidate?.candidate_party?.partyLogo}}" width="36">
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                            <mat-cell *matCellDef="let candidate"> {{candidate?.candidate_detail?.name}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="party">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Party </mat-header-cell>
+                            <mat-cell *matCellDef="let candidate"> {{candidate?.candidate_party?.title}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="email">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                            <mat-cell *matCellDef="let candidate"> {{candidate?.candidate_detail?.email}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Votes </mat-header-cell>
+                            <mat-cell *matCellDef="let candidate"> {{candidate?.candidate_detail?.candidate_votes.length}} </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+                        <mat-row *matRowDef="let row1; columns: displayedColumns2;"></mat-row>
+                    </mat-table>
+                    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+                    </mat-paginator>
+                </div>
+                <!-- / CONTENT CARD -->
+            </div>
+            <!-- / CENTER -->
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Vote your candidates" *ngIf="election_entry">
+        <div id="products" class="page-layout carded fullwidth inner-scroll">
+            <!-- TOP BACKGROUND -->
+            <div class="top-bg accent"></div>
+            <!-- / TOP BACKGROUND -->
+            <!-- CENTER -->
+            <div class="center">
+                <!-- HEADER -->
+                <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+                    fxLayoutAlign.gt-sm="space-between center">
+                    <!-- APP TITLE -->
+                    <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="logo-icon s-32 mr-16"
+                            [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                            how_to_vote
+                        </mat-icon>
+                        <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                            {{elctionDdetails?.title}}
+                        </span>
+                        <span *ngIf="isVoted > 0">( Voting done. Please wait for the results. )</span>
+                    </div>
+                    <!-- / APP TITLE -->
+
+                    <!-- ADD BUTTON -->
+                    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
+                        <!-- <span>ADD VOTER</span> -->
+                    </button>
+                    <!-- / ADD BUTTON -->
+
+                </div>
+                <!-- / HEADER -->
+                <!-- CONTENT CARD -->
+                <div class="content-card" style="min-height: 300px; padding: 50px;" *ngIf="adminUser == false">
+                    <div class="content-card" fxLayout="row" fxLayoutAlign="start center"
+                        *ngFor="let candi of elctionDdetails?.election_candidates"
+                        style="min-height: 50px; padding: 10px 20px;">
+
+                        <span *ngIf="candi?.candidate_detail && candi?.candidate_detail?.id != votedFor"
+                            style="display: inline-block; max-width: 20%; padding: 0 30px; font-weight: bold;">{{candi?.candidate_detail?.name}}</span>
+                        <span *ngIf="candi?.candidate_detail?.id == votedFor"
+                            style="display: inline-block; max-width: 20%; padding: 0 30px; font-weight: bold; color: green">{{candi?.candidate_detail?.name}}</span>
+
+                        <span style="display: inline-block; max-width: 20%; padding: 0 30px; "
+                            *ngIf="!voted && candi?.candidate_detail">
+                            <button *ngIf="candi?.voterLength < 1 && isVoted == 0"
+                                (click)="doVote(candi?.candidate_detail?.id)">Vote</button>
+                            <!-- <button *ngIf="isVoted > 0">Voted!</button> -->
+                        </span>
+                    </div>
+                </div>
+
+
+
+                <div class="content-card" style="min-height: 300px; padding: 50px;" *ngIf="adminUser">
+                    <p><b>Election Status </b> (Candidates achieved at least 1 vote.)</p>
+                    <div class="content-card" fxLayout="row" fxLayoutAlign="start center"
+                        *ngFor="let result of results" style="min-height: 50px; padding: 10px 20px;">
+                        <span style="display: inline-block; max-width: 20%; padding: 0 30px; "><b>{{result.candidateName}}</b></span>
+                        <!-- <span style="display: inline-block; max-width: 20%; padding: 0 30px; " *ngIf="!voted && !adminUser">
+                            <button (click)="doVote(candi?.candidate_detail?.id)">Vote</button></span> -->
+                        <span style="display: inline-block; max-width: 20%; padding: 0 30px; " *ngIf="adminUser">
+                            <b>{{result.voteLength}}</b>  Votes </span>
+                    </div>
+                    
+                    
+                    <p><button mat-raised-button color="primary" (click)="sendResults(elctionDdetails?.id)">Publish Result</button></p>
+                </div>
+                <!-- / CONTENT CARD -->
+            </div>
+            <!-- / CENTER -->
+        </div>
+    </mat-tab>
+
 </mat-tab-group>

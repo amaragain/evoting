@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
-  Elections,
-  Members
+  Members,
+  Elections
 } from '../index';
 
 declare var Object: any;
@@ -9,6 +9,7 @@ export interface VoterInterface {
   "id"?: any;
   "election_id"?: any;
   "voter_id"?: any;
+  voter_member?: Members;
   voter?: Elections;
   voter_detail?: Members;
 }
@@ -17,6 +18,7 @@ export class Voter implements VoterInterface {
   "id": any;
   "election_id": any;
   "voter_id": any;
+  voter_member: Members;
   voter: Elections;
   voter_detail: Members;
   constructor(data?: VoterInterface) {
@@ -66,6 +68,14 @@ export class Voter implements VoterInterface {
         },
       },
       relations: {
+        voter_member: {
+          name: 'voter_member',
+          type: 'Members',
+          model: 'Members',
+          relationType: 'belongsTo',
+                  keyFrom: 'id',
+          keyTo: 'id'
+        },
         voter: {
           name: 'voter',
           type: 'Elections',

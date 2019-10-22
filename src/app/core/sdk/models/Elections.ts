@@ -1,26 +1,29 @@
 /* tslint:disable */
 import {
-  Members,
   Party,
   Voter,
-  Candidate
+  Candidate,
+  Transactions,
+  Votes
 } from '../index';
 
 declare var Object: any;
 export interface ElectionsInterface {
   "id"?: any;
-  voter_candidate?: Members[];
   election_parties?: Party[];
   election_voters?: Voter[];
-  election_candidate?: Candidate[];
+  election_candidates?: Candidate[];
+  election_transactions?: Transactions[];
+  votedElection?: Votes[];
 }
 
 export class Elections implements ElectionsInterface {
   "id": any;
-  voter_candidate: Members[];
   election_parties: Party[];
   election_voters: Voter[];
-  election_candidate: Candidate[];
+  election_candidates: Candidate[];
+  election_transactions: Transactions[];
+  votedElection: Votes[];
   constructor(data?: ElectionsInterface) {
     Object.assign(this, data);
   }
@@ -60,14 +63,6 @@ export class Elections implements ElectionsInterface {
         },
       },
       relations: {
-        voter_candidate: {
-          name: 'voter_candidate',
-          type: 'Members[]',
-          model: 'Members',
-          relationType: 'hasMany',
-                  keyFrom: 'id',
-          keyTo: 'id'
-        },
         election_parties: {
           name: 'election_parties',
           type: 'Party[]',
@@ -84,10 +79,26 @@ export class Elections implements ElectionsInterface {
                   keyFrom: 'id',
           keyTo: 'election_id'
         },
-        election_candidate: {
-          name: 'election_candidate',
+        election_candidates: {
+          name: 'election_candidates',
           type: 'Candidate[]',
           model: 'Candidate',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'electionId'
+        },
+        election_transactions: {
+          name: 'election_transactions',
+          type: 'Transactions[]',
+          model: 'Transactions',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'election_id'
+        },
+        votedElection: {
+          name: 'votedElection',
+          type: 'Votes[]',
+          model: 'Votes',
           relationType: 'hasMany',
                   keyFrom: 'id',
           keyTo: 'election_id'

@@ -1,34 +1,39 @@
 {
-    "name": "Elections",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
+  "name": "Elections",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "election_parties": {
+      "type": "hasMany",
+      "model": "party",
+      "foreignKey": "election_id"
     },
-    "properties": {},
-    "validations": [],
-    "relations": {
-        "election_parties": {
-            "type": "hasMany",
-            "model": "party",
-            "foreignKey": "election_id"
-        },
-        "election_voters": {
-            "type": "hasMany",
-            "model": "voter",
-            "foreignKey": "election_id"
-        },
-        "election_candidate": {
-            "type": "hasMany",
-            "model": "candidate",
-            "foreignKey": "election_id"
-        },
-        "voter_candidate":{
-            "type": "hasMany",
-            "model": "Members",
-            "foreignKey": "id"
-        }
+    "election_voters": {
+      "type": "hasMany",
+      "model": "voter",
+      "foreignKey": "election_id"
     },
-    "acls": [],
-    "methods": {}
+    "election_candidates": {
+      "type": "hasMany",
+      "model": "candidate",
+      "foreignKey": "electionId"
+    },
+    "election_transactions": {
+      "type": "hasMany",
+      "model": "Transactions",
+      "foreignKey": "election_id"
+    },
+    "votedElection": {
+      "type": "hasMany",
+      "model": "votes",
+      "foreignKey": "election_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
 }

@@ -1,25 +1,29 @@
 {
-    "name": "voter",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
+  "name": "voter",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "voter_member": {
+      "type": "belongsTo",
+      "model": "Members",
+      "foreignKey": "id"
     },
-    "properties": {},
-    "validations": [],
-    "relations": {
-        "voter": {
-            "type": "belongsTo",
-            "model": "Elections",
-            "foreignKey": "election_id"
-        },
-        "voter_detail":
-        {
-            "type": "belongsTo",
-            "model": "Members",
-            "foreignKey": "voter_id"
-        }
+    "voter": {
+      "type": "belongsTo",
+      "model": "Elections",
+      "foreignKey": "election_id"
     },
-    "acls": [],
-    "methods": {}
+    "voter_detail": {
+      "type": "belongsTo",
+      "model": "Members",
+      "foreignKey": "voter_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
 }

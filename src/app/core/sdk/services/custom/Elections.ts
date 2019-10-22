@@ -10,10 +10,11 @@ import { ErrorHandler } from '../core/error.service';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Elections } from '../../models/Elections';
-import { Members } from '../../models/Members';
 import { Party } from '../../models/Party';
 import { Voter } from '../../models/Voter';
 import { Candidate } from '../../models/Candidate';
+import { Transactions } from '../../models/Transactions';
+import { Votes } from '../../models/Votes';
 
 
 /**
@@ -29,99 +30,6 @@ export class ElectionsApi extends BaseLoopBackApi {
     @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
   ) {
     super(http,  models, auth, errorHandler);
-  }
-
-  /**
-   * Find a related item by id for voter_candidate.
-   *
-   * @param {any} id Elections id
-   *
-   * @param {any} fk Foreign key for voter_candidate
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Elections` object.)
-   * </em>
-   */
-  public findByIdVoter_candidate(id: any, fk: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/voter_candidate/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Delete a related item by id for voter_candidate.
-   *
-   * @param {any} id Elections id
-   *
-   * @param {any} fk Foreign key for voter_candidate
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public destroyByIdVoter_candidate(id: any, fk: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/voter_candidate/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Update a related item by id for voter_candidate.
-   *
-   * @param {any} id Elections id
-   *
-   * @param {any} fk Foreign key for voter_candidate
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Elections` object.)
-   * </em>
-   */
-  public updateByIdVoter_candidate(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "PUT";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/voter_candidate/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
   }
 
   /**
@@ -311,11 +219,11 @@ export class ElectionsApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a related item by id for election_candidate.
+   * Find a related item by id for election_candidates.
    *
    * @param {any} id Elections id
    *
-   * @param {any} fk Foreign key for election_candidate
+   * @param {any} fk Foreign key for election_candidates
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -326,10 +234,10 @@ export class ElectionsApi extends BaseLoopBackApi {
    * This usually means the response is a `Elections` object.)
    * </em>
    */
-  public findByIdElection_candidate(id: any, fk: any, customHeaders?: Function): Observable<any> {
+  public findByIdElection_candidates(id: any, fk: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/election_candidate/:fk";
+    "/Elections/:id/election_candidates/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -341,11 +249,11 @@ export class ElectionsApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a related item by id for election_candidate.
+   * Delete a related item by id for election_candidates.
    *
    * @param {any} id Elections id
    *
-   * @param {any} fk Foreign key for election_candidate
+   * @param {any} fk Foreign key for election_candidates
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -353,10 +261,10 @@ export class ElectionsApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdElection_candidate(id: any, fk: any, customHeaders?: Function): Observable<any> {
+  public destroyByIdElection_candidates(id: any, fk: any, customHeaders?: Function): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/election_candidate/:fk";
+    "/Elections/:id/election_candidates/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -368,11 +276,11 @@ export class ElectionsApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update a related item by id for election_candidate.
+   * Update a related item by id for election_candidates.
    *
    * @param {any} id Elections id
    *
-   * @param {any} fk Foreign key for election_candidate
+   * @param {any} fk Foreign key for election_candidates
    *
    * @param {object} data Request data.
    *
@@ -387,10 +295,10 @@ export class ElectionsApi extends BaseLoopBackApi {
    * This usually means the response is a `Elections` object.)
    * </em>
    */
-  public updateByIdElection_candidate(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
+  public updateByIdElection_candidates(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/election_candidate/:fk";
+    "/Elections/:id/election_candidates/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -404,13 +312,13 @@ export class ElectionsApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries voter_candidate of Elections.
+   * Find a related item by id for election_transactions.
    *
    * @param {any} id Elections id
    *
-   * @param {object} filter 
+   * @param {any} fk Foreign key for election_transactions
    *
-   * @returns {object[]} An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -419,24 +327,53 @@ export class ElectionsApi extends BaseLoopBackApi {
    * This usually means the response is a `Elections` object.)
    * </em>
    */
-  public getVoter_candidate(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
+  public findByIdElection_transactions(id: any, fk: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/voter_candidate";
+    "/Elections/:id/election_transactions/:fk";
     let _routeParams: any = {
-      id: id
+      id: id,
+      fk: fk
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
   /**
-   * Creates a new instance in voter_candidate of this model.
+   * Delete a related item by id for election_transactions.
    *
    * @param {any} id Elections id
+   *
+   * @param {any} fk Foreign key for election_transactions
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public destroyByIdElection_transactions(id: any, fk: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Elections/:id/election_transactions/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Update a related item by id for election_transactions.
+   *
+   * @param {any} id Elections id
+   *
+   * @param {any} fk Foreign key for election_transactions
    *
    * @param {object} data Request data.
    *
@@ -451,12 +388,13 @@ export class ElectionsApi extends BaseLoopBackApi {
    * This usually means the response is a `Elections` object.)
    * </em>
    */
-  public createVoter_candidate(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
+  public updateByIdElection_transactions(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/voter_candidate";
+    "/Elections/:id/election_transactions/:fk";
     let _routeParams: any = {
-      id: id
+      id: id,
+      fk: fk
     };
     let _postBody: any = {
       data: data
@@ -467,22 +405,28 @@ export class ElectionsApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes all voter_candidate of this model.
+   * Find a related item by id for votedElection.
    *
    * @param {any} id Elections id
+   *
+   * @param {any} fk Foreign key for votedElection
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
-   * This method returns no data.
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Elections` object.)
+   * </em>
    */
-  public deleteVoter_candidate(id: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "DELETE";
+  public findByIdVotedElection(id: any, fk: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/voter_candidate";
+    "/Elections/:id/votedElection/:fk";
     let _routeParams: any = {
-      id: id
+      id: id,
+      fk: fk
     };
     let _postBody: any = {};
     let _urlParams: any = {};
@@ -491,30 +435,64 @@ export class ElectionsApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts voter_candidate of Elections.
+   * Delete a related item by id for votedElection.
    *
    * @param {any} id Elections id
    *
-   * @param {object} where Criteria to match model instances
+   * @param {any} fk Foreign key for votedElection
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
+   * This method returns no data.
    */
-  public countVoter_candidate(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
+  public destroyByIdVotedElection(id: any, fk: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/voter_candidate/count";
+    "/Elections/:id/votedElection/:fk";
     let _routeParams: any = {
-      id: id
+      id: id,
+      fk: fk
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Update a related item by id for votedElection.
+   *
+   * @param {any} id Elections id
+   *
+   * @param {any} fk Foreign key for votedElection
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Elections` object.)
+   * </em>
+   */
+  public updateByIdVotedElection(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "PUT";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Elections/:id/votedElection/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -752,7 +730,7 @@ export class ElectionsApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries election_candidate of Elections.
+   * Queries election_candidates of Elections.
    *
    * @param {any} id Elections id
    *
@@ -767,10 +745,10 @@ export class ElectionsApi extends BaseLoopBackApi {
    * This usually means the response is a `Elections` object.)
    * </em>
    */
-  public getElection_candidate(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
+  public getElection_candidates(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/election_candidate";
+    "/Elections/:id/election_candidates";
     let _routeParams: any = {
       id: id
     };
@@ -782,7 +760,7 @@ export class ElectionsApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in election_candidate of this model.
+   * Creates a new instance in election_candidates of this model.
    *
    * @param {any} id Elections id
    *
@@ -799,10 +777,10 @@ export class ElectionsApi extends BaseLoopBackApi {
    * This usually means the response is a `Elections` object.)
    * </em>
    */
-  public createElection_candidate(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
+  public createElection_candidates(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/election_candidate";
+    "/Elections/:id/election_candidates";
     let _routeParams: any = {
       id: id
     };
@@ -815,7 +793,7 @@ export class ElectionsApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes all election_candidate of this model.
+   * Deletes all election_candidates of this model.
    *
    * @param {any} id Elections id
    *
@@ -825,10 +803,10 @@ export class ElectionsApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteElection_candidate(id: any, customHeaders?: Function): Observable<any> {
+  public deleteElection_candidates(id: any, customHeaders?: Function): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/election_candidate";
+    "/Elections/:id/election_candidates";
     let _routeParams: any = {
       id: id
     };
@@ -839,7 +817,7 @@ export class ElectionsApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts election_candidate of Elections.
+   * Counts election_candidates of Elections.
    *
    * @param {any} id Elections id
    *
@@ -853,10 +831,242 @@ export class ElectionsApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countElection_candidate(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
+  public countElection_candidates(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/election_candidate/count";
+    "/Elections/:id/election_candidates/count";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Queries election_transactions of Elections.
+   *
+   * @param {any} id Elections id
+   *
+   * @param {object} filter 
+   *
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Elections` object.)
+   * </em>
+   */
+  public getElection_transactions(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Elections/:id/election_transactions";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in election_transactions of this model.
+   *
+   * @param {any} id Elections id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Elections` object.)
+   * </em>
+   */
+  public createElection_transactions(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Elections/:id/election_transactions";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Deletes all election_transactions of this model.
+   *
+   * @param {any} id Elections id
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public deleteElection_transactions(id: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Elections/:id/election_transactions";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Counts election_transactions of Elections.
+   *
+   * @param {any} id Elections id
+   *
+   * @param {object} where Criteria to match model instances
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `count` – `{number}` - 
+   */
+  public countElection_transactions(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Elections/:id/election_transactions/count";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Queries votedElection of Elections.
+   *
+   * @param {any} id Elections id
+   *
+   * @param {object} filter 
+   *
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Elections` object.)
+   * </em>
+   */
+  public getVotedElection(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Elections/:id/votedElection";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in votedElection of this model.
+   *
+   * @param {any} id Elections id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Elections` object.)
+   * </em>
+   */
+  public createVotedElection(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Elections/:id/votedElection";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Deletes all votedElection of this model.
+   *
+   * @param {any} id Elections id
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public deleteVotedElection(id: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Elections/:id/votedElection";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Counts votedElection of Elections.
+   *
+   * @param {any} id Elections id
+   *
+   * @param {object} where Criteria to match model instances
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `count` – `{number}` - 
+   */
+  public countVotedElection(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Elections/:id/votedElection/count";
     let _routeParams: any = {
       id: id
     };
@@ -930,34 +1140,28 @@ export class ElectionsApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in voter_candidate of this model.
-   *
-   * @param {any} id Elections id
+   * Create an account
    *
    * @param {object} data Request data.
    *
-   * This method expects a subset of model properties as request parameters.
+   *  - `elec_details` – `{object}` - 
    *
-   * @returns {object[]} An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Elections` object.)
-   * </em>
+   * Data properties:
+   *
+   *  - `success` – `{object}` - 
    */
-  public createManyVoter_candidate(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
+  public createEthElecAccount(elec_details: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/voter_candidate";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
+    "/Elections/createEthElecAccount";
+    let _routeParams: any = {};
+    let _postBody: any = {};
     let _urlParams: any = {};
+    if (typeof elec_details !== 'undefined' && elec_details !== null) _urlParams.elec_details = elec_details;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -1029,7 +1233,7 @@ export class ElectionsApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in election_candidate of this model.
+   * Creates a new instance in election_candidates of this model.
    *
    * @param {any} id Elections id
    *
@@ -1046,10 +1250,76 @@ export class ElectionsApi extends BaseLoopBackApi {
    * This usually means the response is a `Elections` object.)
    * </em>
    */
-  public createManyElection_candidate(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
+  public createManyElection_candidates(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Elections/:id/election_candidate";
+    "/Elections/:id/election_candidates";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in election_transactions of this model.
+   *
+   * @param {any} id Elections id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Elections` object.)
+   * </em>
+   */
+  public createManyElection_transactions(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Elections/:id/election_transactions";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in votedElection of this model.
+   *
+   * @param {any} id Elections id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Elections` object.)
+   * </em>
+   */
+  public createManyVotedElection(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Elections/:id/votedElection";
     let _routeParams: any = {
       id: id
     };

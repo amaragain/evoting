@@ -1,38 +1,38 @@
 {
-    "db": {
-        "name": "db",
-        "connector": "memory"
-    },
-    "mongoDB": {
-        "host": "localhost",
-        "port": 27017,
-        "url": "",
-        "database": "EvotingManagement",
-        "password": "",
-        "name": "mongoDB",
-        "user": "",
-        "connector": "mongodb"
-    },
-    "storage": {
-        "name": "storage",
-        "connector": "loopback-component-storage",
-        "provider": "filesystem",
-        "root": "../Storage"
-    },
-    "myEmailDataSource": {
-        "name": "myEmailDataSource",
-        "connector": "mail",
-        "transports": [
-            {
-                "type": "SMTP",
-                "host": "smtp.gmail.com",
-                "secure": true,
-                "port": 465,
-                "auth": {
-                    "user": "minnu123suresh@gmail.com",
-                    "pass": "minnu1996"
-                }
-            }
-        ]
-    }
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongoDB": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "",
+    "database": "EvotingManagement",
+    "password": "",
+    "name": "mongoDB",
+    "user": "",
+    "connector": "mongodb"
+  },
+  "storage": {
+    "name": "storage",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "../Storage"
+  },
+  "myEmailDataSource": {
+    "name": "myEmailDataSource",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "SMTP",
+        "host": "smtp.gmail.com",
+        "secure": true,
+        "port": 465,
+        "auth": {
+          "user": "evotingproject7@gmail.com",
+          "pass": "Evoting123456789@"
+        }
+      }
+    ]
+  }
 }

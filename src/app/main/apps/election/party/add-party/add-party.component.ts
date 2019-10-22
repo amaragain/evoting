@@ -5,7 +5,6 @@ import { PartyApi, Party } from '../../../../../core/sdk/index';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http'
 import { environment } from '../../../../../../environments/environment'
-import { Options } from 'selenium-webdriver/firefox';
 
 @Component({
   selector: 'app-add-party',
@@ -26,7 +25,7 @@ export class AddPartyComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private _formBuilder: FormBuilder,
     private router: Router,
-    public http: Http
+    public httpFile: Http
 
   ) { }
 
@@ -40,10 +39,9 @@ export class AddPartyComponent implements OnInit {
   }
 
   uploadPartyLogo(event) {
-    
-    const URL = this.baseUrl + '/api/storages/party_logo/upload'    
+    const URL = this.baseUrl + '/api/storages/party_logo/upload'
     let fileList: FileList = event.target.files
-    console.log(fileList,"LLL")
+    
     if (fileList.length > 0) {
       let file: File = fileList[0]
       var file_ext = file.name.substr(file.name.lastIndexOf('.') + 1)
@@ -53,13 +51,16 @@ export class AddPartyComponent implements OnInit {
       formData.append('uploadFile', file, this.new_file_name)
       let headers = new Headers()
       let options = new RequestOptions({ headers: headers })
-      console.log(formData,"hyuu")
-      this.http.post(URL, formData,options ).subscribe(val => {
-        console.log(val,"ghjk")  
-        if (val) {
+      console.log('URL', URL, options, FormData);
+      this.httpFile.post(URL, formData, options).subscribe(res => {
+        if (res) {
+          console.log('res', res);
+
           this.addPartyForm.value.partyLogo = this.new_file_name
+          console.log('this.new_file_name', this.new_file_name);
+
         }
-      })
+      });
     }
   }
 }

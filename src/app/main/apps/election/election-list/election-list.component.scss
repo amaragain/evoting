@@ -1,5 +1,11 @@
 @import "src/@fuse/scss/fuse";
-
+mat-icon{
+    cursor: pointer;
+    transition: all .1s;
+}
+mat-icon:hover{
+    opacity: .6;
+}
 e-commerce-products {
 
     #products {

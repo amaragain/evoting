@@ -28,7 +28,7 @@ module.exports = function(candidate) {
 
     //                     app.models.Email.send({
     //                         to: res.email,
-    //                         from: 'minnu123suresh@gmail.com',
+    //                         from: 'evotingproject7@gmail.com',
     //                         subject: 'my subject',
     //                         text: 'my text',
     //                         html: 'my <em>html</em>'
@@ -59,5 +59,25 @@ module.exports = function(candidate) {
 //             ],
 //             returns: { arg: 'success', type: 'string' }
 //         });
+
+
+    // candidate.getVotes = function getVotes(datas, cb) {
+    // const ds = Wsuser.dataSource;
+
+    //     ds.connector.query(
+    //         sql,
+    //         [],
+    //         function (err, userAllIds) {
+    //             if (err) {
+    //                 console.error('[Search Practitioners]', err);
+    //                 cb({
+    //                     message: 'This event duplicates another event on this day. Try changing the facility or shift'
+    //                 });
+    //             } else {
+
+    //             });
+
+    // }
+
 
 }

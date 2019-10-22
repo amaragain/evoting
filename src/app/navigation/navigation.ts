@@ -18,7 +18,7 @@ export const navigation: FuseNavigation[] = [{
                         id: 'Election',
                         title: 'Election',
                         type: 'item',
-                        url: '/apps/e-commerce/products',
+                    url: '/apps/election/election-list',
                         
                     }
                     

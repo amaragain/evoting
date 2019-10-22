@@ -10,6 +10,7 @@ export interface PartyInterface {
   "election_id"?: any;
   election?: Elections;
   election_cand?: Candidate[];
+  party_cand?: Candidate[];
 }
 
 export class Party implements PartyInterface {
@@ -17,6 +18,7 @@ export class Party implements PartyInterface {
   "election_id": any;
   election: Elections;
   election_cand: Candidate[];
+  party_cand: Candidate[];
   constructor(data?: PartyInterface) {
     Object.assign(this, data);
   }
@@ -75,6 +77,14 @@ export class Party implements PartyInterface {
           relationType: 'hasMany',
                   keyFrom: 'id',
           keyTo: 'party_id'
+        },
+        party_cand: {
+          name: 'party_cand',
+          type: 'Candidate[]',
+          model: 'Candidate',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'partyId'
         },
       }
     }

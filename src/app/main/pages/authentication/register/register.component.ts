@@ -1,3 +1,4 @@
+import { environment } from 'environments/environment';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -5,9 +6,8 @@ import { takeUntil } from 'rxjs/internal/operators';
 import { ElectionsApi, PartyApi, CandidateApi,MembersApi } from '../../../../core/sdk';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
-import { id } from '@swimlane/ngx-datatable/release/utils';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { identifierName } from '@angular/compiler';
+import { id } from '@swimlane/ngx-datatable/release/utils';
 
 
 @Component({
@@ -22,8 +22,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
     elections;
     party;
     candidate_details: any;
-    parties: any = []
-    partylist: any = []
+    parties: any = [];
+    partylist: any = [];
+    baseUrl = environment.API_URL;
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -31,9 +32,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
-        private router: Router,
         private election: ElectionsApi,
         private partys: PartyApi,
+        private router: Router,
         private candidate: CandidateApi,
         private membersapi:MembersApi
     ) {
@@ -119,8 +120,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
         console.log(candidate_election_details)
         this.membersapi.createCandidate(candidate_election_details).subscribe(item => {
             console.log(item, "dfghjkjjjjjj")
+            this.router.navigate(['/pages/auth/login']);
         })
-        this.router.navigate(['/pages/auth/login']);
     }
     
 
@@ -134,7 +135,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
             },
             include: [
                 {
-                    relation: 'election_parties'
+                    relation: 'election_parties',
+                    scope: {
+                        include: [
+                            {
+                                relation: 'party_cand'
+                            }
+                        ]
+                    }
                 }
             ]
         }
@@ -144,7 +152,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
             if (res) {
 
                 let parseData = JSON.parse(JSON.stringify(res))
-                this.parties = parseData[0].election_parties
+                let allParties = parseData[0].election_parties;
+                allParties.map((party) => {
+                    if (party.party_cand.length == 0){
+                        this.parties.push(party);
+                    }
+                });
                 console.log(parseData[0].election_parties, "ghjklbnm,")
                 this.candidate_details = res[0];
                 console.log(this.candidate_details, "bbbbbbbbbb")

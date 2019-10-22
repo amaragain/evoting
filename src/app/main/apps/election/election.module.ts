@@ -27,9 +27,6 @@ import { AddPartyComponent } from './party/add-party/add-party.component';
 import { PartyListComponent } from './party/party-list/party-list.component';
 import { AddVoterComponent } from './party/add-voter/add-voter.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { CandidateListComponent } from './candidate-list/candidate-list.component';
-import { CandidateViewComponent } from './candidate-view/candidate-view.component';
-
 
 const routes: Routes = [
     {
@@ -43,14 +40,6 @@ const routes: Routes = [
     {
         path     : 'party/add-party',
         component: AddPartyComponent,
-    },
-    {
-        path     : 'candidate-list',
-        component: CandidateListComponent,
-    },
-    {
-        path     : 'candidate-view',
-        component: CandidateViewComponent,
     }
 ];
 
@@ -61,9 +50,7 @@ const routes: Routes = [
         DeleteElectionComponent,
         AddPartyComponent,
         PartyListComponent,
-        AddVoterComponent,
-        CandidateListComponent,
-        CandidateViewComponent
+        AddVoterComponent
        
         
     ],

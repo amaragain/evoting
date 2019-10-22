@@ -1,24 +1,29 @@
 {
-    "name": "party",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
+  "name": "party",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "election": {
+      "type": "belongsTo",
+      "model": "Elections",
+      "foreignKey": "election_id"
     },
-    "properties": {},
-    "validations": [],
-    "relations": {
-        "election": {
-            "type": "belongsTo",
-            "model": "Elections",
-            "foreignKey": "election_id"
-        },
-        "election_cand": {
-            "type": "hasMany",
-            "model": "candidate",
-            "foreignKey": "party_id"
-        }
+    "election_cand": {
+      "type": "hasMany",
+      "model": "candidate",
+      "foreignKey": "party_id"
     },
-    "acls": [],
-    "methods": {}
+    "party_cand": {
+      "type": "hasMany",
+      "model": "candidate",
+      "foreignKey": "partyId"
+    }
+  },
+  "acls": [],
+  "methods": {}
 }

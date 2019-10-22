@@ -55,6 +55,10 @@ import { EmailApi } from './services/custom/Email';
 import { MyUserApi } from './services/custom/MyUser';
 import { CandidateApi } from './services/custom/Candidate';
 import { WalletApi } from './services/custom/Wallet';
+import { TransactionsApi } from './services/custom/Transactions';
+import { VotesApi } from './services/custom/Votes';
+import { Candidate_walletApi } from './services/custom/Candidate_wallet';
+import { Acc_addressApi } from './services/custom/Acc_address';
 /**
 * @module SDKBrowserModule
 * @description
@@ -94,6 +98,10 @@ export class SDKBrowserModule {
         MyUserApi,
         CandidateApi,
         WalletApi,
+        TransactionsApi,
+        VotesApi,
+        Candidate_walletApi,
+        Acc_addressApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]

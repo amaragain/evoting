@@ -1,40 +1,48 @@
 {
-    "name": "candidate",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
+  "name": "candidate",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "election_candidateregister": {
+      "type": "belongsTo",
+      "model": "Elections",
+      "foreignKey": "election_id"
     },
-    "properties": {
-        "election_id": {
-            "type": "number"
-        },
-        "voter_id": {
-            "type": "number"
-        }
+    "candidate_detail": {
+      "type": "belongsTo",
+      "model": "Members",
+      "foreignKey": "candidateId"
     },
-    "validations": [],
-    "relations": {
-        "election_candidateregister": {
-            "type": "belongsTo",
-            "model": "Elections",
-            "foreignKey": "election_id"
-        },
-        "party_candidateregister": {
-            "type": "belongsTo",
-            "model": "party",
-            "foreignKey": "party_id"
-        }
+    "candidate_votes": {
+      "type": "hasMany",
+      "model": "votes",
+      "foreignKey": "candidate_id"
     },
-    "acls": [
-        {
-            "accessType": "EXECUTE",
-            "principalType": "ROLE",
-            "principalId": "$authenticated",
-            "permission": "ALLOW",
-            "property": "createCandidate",
-            "model": "*"
-        }
-    ],
-    "methods": {}
+    "party_candidateregister": {
+      "type": "belongsTo",
+      "model": "party",
+      "foreignKey": "party_id"
+    },
+    "candidate_party": {
+      "type": "belongsTo",
+      "model": "party",
+      "foreignKey": "partyId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "createCandidate",
+      "model": "*"
+    }
+  ],
+  "methods": {}
 }

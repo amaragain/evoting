@@ -7,8 +7,8 @@ module.exports = function(Email) {
     // send an email
     Email.sendEmail = function(cb) {
       Email.app.models.Email.send({
-        to: 'anithasuresh035@gmail.com',
-        from: 'minnuanitha20@gmail.com',
+        to: 'evotingproject7@gmail.com',
+        from: 'evotingproject7@gmail.com',
         subject: 'my subject',
         text: 'my text',
         html: 'my <em>html</em>'

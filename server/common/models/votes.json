@@ -1,0 +1,24 @@
+{
+  "name": "votes",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "candidate": {
+      "type": "belongsTo",
+      "model": "Members",
+      "foreignKey": "candidate_id"
+    },
+    "voter": {
+      "type": "belongsTo",
+      "model": "Members",
+      "foreignKey": "voter_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -5,7 +5,7 @@
 export const environment = {
     production: false,
     hmr       : false,
-    API_URL: 'http://192.168.43.62:3000'
+    API_URL: 'http://127.0.0.1:3000'
 };
 
 /*

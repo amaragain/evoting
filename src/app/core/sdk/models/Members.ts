@@ -1,24 +1,36 @@
 /* tslint:disable */
+import {
+  Party,
+  Votes
+} from '../index';
 
 declare var Object: any;
 export interface MembersInterface {
+  "name"?: string;
+  "email": string;
   "realm"?: string;
   "username"?: string;
-  "email": string;
   "emailVerified"?: boolean;
   "id"?: any;
+  "candidate_id"?: any;
   "password"?: string;
   accessTokens?: any[];
+  candidate_party?: Party;
+  candidate_votes?: Votes[];
 }
 
 export class Members implements MembersInterface {
+  "name": string;
+  "email": string;
   "realm": string;
   "username": string;
-  "email": string;
   "emailVerified": boolean;
   "id": any;
+  "candidate_id": any;
   "password": string;
   accessTokens: any[];
+  candidate_party: Party;
+  candidate_votes: Votes[];
   constructor(data?: MembersInterface) {
     Object.assign(this, data);
   }
@@ -52,6 +64,14 @@ export class Members implements MembersInterface {
       path: 'Members',
       idName: 'id',
       properties: {
+        "name": {
+          name: 'name',
+          type: 'string'
+        },
+        "email": {
+          name: 'email',
+          type: 'string'
+        },
         "realm": {
           name: 'realm',
           type: 'string'
@@ -60,16 +80,16 @@ export class Members implements MembersInterface {
           name: 'username',
           type: 'string'
         },
-        "email": {
-          name: 'email',
-          type: 'string'
-        },
         "emailVerified": {
           name: 'emailVerified',
           type: 'boolean'
         },
         "id": {
           name: 'id',
+          type: 'any'
+        },
+        "candidate_id": {
+          name: 'candidate_id',
           type: 'any'
         },
         "password": {
@@ -85,6 +105,22 @@ export class Members implements MembersInterface {
           relationType: 'hasMany',
                   keyFrom: 'id',
           keyTo: 'userId'
+        },
+        candidate_party: {
+          name: 'candidate_party',
+          type: 'Party',
+          model: 'Party',
+          relationType: 'belongsTo',
+                  keyFrom: 'candidate_id',
+          keyTo: 'id'
+        },
+        candidate_votes: {
+          name: 'candidate_votes',
+          type: 'Votes[]',
+          model: 'Votes',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'candidate_id'
         },
       }
     }

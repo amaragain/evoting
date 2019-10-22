@@ -1,0 +1,23 @@
+{
+  "name": "candidate_wallet",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "coin": {
+      "type": "number"
+    },
+    "candidate_id": {
+      "type": "string"
+    },
+    "election_id": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
