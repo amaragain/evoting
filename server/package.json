@@ -24,11 +24,11 @@
     "loopback": "^3.22.0",
     "loopback-component-passport": "^3.4.1",
     "loopback-component-storage": "^3.3.1",
-    "loopback-connector-mongodb": "^1.18.1",
+    "loopback-connector-mongodb": "^3.6.0",
     "loopback-ds-timestamp-mixin": "^3.4.1"
   },
   "devDependencies": {
-    "eslint": "^3.17.1",
+    "eslint": "^4.18.2",
     "eslint-config-loopback": "^8.0.0"
   },
   "repository": {
